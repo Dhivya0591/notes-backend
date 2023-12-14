@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 // MongoDB connection URI
 const uri =
-  "mongodb+srv://mahith1babloo:mahith1206@cluster0.bvsbz9f.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://dhivya:Dhivya1206@cluster0.nvlygew.mongodb.net/?retryWrites=true&w=majority";
 
 // Connect to MongoDB
 const client = new MongoClient(uri, {
@@ -69,8 +69,6 @@ app.delete("/api/notes/:id", async (req, res) => {
     const database = client.db("notes");
     const notesCollection = database.collection("notes_info");
     const objectId = new ObjectId(id);
-    console.log("id: ", id);
-    console.log("id object ", objectId);
     await notesCollection.deleteOne({ _id: objectId });
     res.json({ success: true });
   } catch (error) {
@@ -102,29 +100,6 @@ app.put("/api/notes/:id", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
-// app.post("/api/insert/:name", async (req, res) => {
-//   try {
-//     console.log("name from body" + req.params.name);
-//     const database = client.db("sample_airbnb");
-//     const collection = database.collection("testing");
-
-//     const name = req.params.name;
-
-//     console.log("name from body" + name);
-
-//     // Insert the data into the collection
-//     const result = await collection.insertOne({ name });
-
-//     res.json({
-//       message: "Data inserted successfully",
-//       insertedId: result.insertedId,
-//     });
-//   } catch (err) {
-//     console.error("Error inserting data into MongoDB:", err);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// });
 
 // Start the server
 app.listen(port, () => {
